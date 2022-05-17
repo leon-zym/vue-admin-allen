@@ -1,26 +1,19 @@
 <template>
   <div id="app">
-    <Layout />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Layout from "./components/Layout.vue";
-
 export default {
-  name: "App",
-  components: {
-    Layout,
-  },
-};
+  name: 'App',
+}
 </script>
 
 <style lang="less">
 html,
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  padding: 0;
-  margin: 0;
+  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 </style>

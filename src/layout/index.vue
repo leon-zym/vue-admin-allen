@@ -3,12 +3,12 @@
   <el-container>
     <!-- 侧边栏 -->
     <el-aside width="auto">
-      <SideBar></SideBar>
+      <SideNav></SideNav>
     </el-aside>
     <el-container>
       <!-- 头部 -->
       <el-header>
-        <Header></Header>
+        <HeadNav></HeadNav>
       </el-header>
       <!-- 主体区域 -->
       <el-main>
@@ -20,20 +20,26 @@
 </template>
 
 <script>
-import SideBar from "./SideBar.vue";
-import Header from "./Header.vue";
+import SideNav from './SideNav.vue'
+import HeadNav from './HeadNav.vue'
 
 export default {
-  name: "Layout",
+  name: 'Layout',
   components: {
-    SideBar,
-    Header,
+    SideNav,
+    HeadNav,
   },
-};
+}
 </script>
 
 <style lang="less" scoped>
-.el-header {
-  background-color: #333;
+.el-container {
+  height: 100%;
+  .el-header {
+    background-color: #333;
+  }
+  .el-aside::-webkit-scrollbar {
+    display: none;
+  }
 }
 </style>

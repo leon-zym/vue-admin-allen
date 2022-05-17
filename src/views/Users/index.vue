@@ -1,10 +1,10 @@
 <template>
-  <div>I am User cpmponent.</div>
+  <div>I am Users cpmponent.</div>
 </template>
 
 <script>
 export default {
-  name: "User",
+  name: "Users",
 };
 </script>
 

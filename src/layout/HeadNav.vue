@@ -1,7 +1,11 @@
 <template>
   <header>
     <div class="l-content">
-      <el-button size="mini" plain="true" icon="el-icon-menu"></el-button>
+      <el-button
+        size="mini"
+        icon="el-icon-menu"
+        @click="handleCollapseSideNav"
+      ></el-button>
       <h3 class="header-breadcrumb">首页</h3>
     </div>
     <div class="r-content">
@@ -20,19 +24,21 @@
 
 <script>
 export default {
-  name: "Header",
+  name: 'HeadNav',
   data() {
     return {
-      userImg: require("../assets/images/user.jpg"),
-    };
+      userImg: require('../assets/images/user.jpg'),
+    }
   },
-};
+  methods: {
+    handleCollapseSideNav() {
+      this.$store.commit('COLLAPSESIDENAV')
+    },
+  },
+}
 </script>
 
 <style lang="less" scoped>
-.l-content {
-  display: flex;
-}
 .header-breadcrumb {
   font-size: 16px;
   font-weight: 400;
@@ -54,12 +60,10 @@ header {
     display: flex;
     align-items: center;
     .el-button {
-      // margin: 0 20px 0 20px;
       margin-right: 20px;
     }
   }
   .r-content {
-    // margin-right: 20px;
     img {
       width: 40px;
       height: 40px;
