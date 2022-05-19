@@ -7,12 +7,12 @@ export default {
     for (let i = 0; i < 7; i++) {
       List.push(
         Mock.mock({
-          Apple: Mock.Random.float(100, 8000, 0, 0),
-          Vivo: Mock.Random.float(100, 8000, 0, 0),
-          Oppo: Mock.Random.float(100, 8000, 0, 0),
-          Huawei: Mock.Random.float(100, 8000, 0, 0),
-          Sumsang: Mock.Random.float(100, 8000, 0, 0),
-          Xiaomi: Mock.Random.float(100, 8000, 0, 0),
+          Apple: Mock.Random.float(20, 500, 0, 0),
+          Vivo: Mock.Random.float(20, 500, 0, 0),
+          Oppo: Mock.Random.float(20, 500, 0, 0),
+          Huawei: Mock.Random.float(20, 500, 0, 0),
+          Sumsang: Mock.Random.float(20, 500, 0, 0),
+          Xiaomi: Mock.Random.float(20, 500, 0, 0),
         })
       )
     }
@@ -23,65 +23,65 @@ export default {
         videoData: [
           {
             name: 'Apple',
-            value: 5999,
+            value: 550,
           },
           {
             name: 'Vivo',
-            value: 1999,
+            value: 250,
           },
           {
             name: 'Oppo',
-            value: 2599,
+            value: 360,
           },
           {
             name: 'Huawei',
-            value: 6999,
+            value: 620,
           },
           {
             name: 'Sumsang',
-            value: 7999,
+            value: 120,
           },
           {
             name: 'Xiaomi',
-            value: 2899,
+            value: 480,
           },
         ],
         // 柱状图
         userData: [
           {
-            date: 'Monday',
-            new: 5,
-            active: 200,
+            date: 'Mon',
+            new: 12,
+            active: 120,
           },
           {
-            date: 'Tuesday',
-            new: 5,
-            active: 200,
+            date: 'Tue',
+            new: 32,
+            active: 320,
           },
           {
-            date: 'Wednesday',
-            new: 5,
-            active: 200,
+            date: 'Wed',
+            new: 45,
+            active: 450,
           },
           {
-            date: 'Thusday',
-            new: 5,
-            active: 200,
+            date: 'Thu',
+            new: 21,
+            active: 180,
           },
           {
-            date: 'Friday',
-            new: 5,
-            active: 200,
+            date: 'Fri',
+            new: 39,
+            active: 250,
           },
           {
-            date: 'Saturday',
-            new: 5,
-            active: 200,
+            date: 'Sat',
+            new: 21,
+            active: 220,
           },
           {
-            date: 'Sunday',
-            new: 5,
-            active: 200,
+            date: 'Sun',
+            new: 38,
+            active: 430,
           },
         ],
         // 折线图
@@ -134,18 +134,6 @@ export default {
             todayBuy: 700,
             monthBuy: 3200,
             totalBuy: 6700,
-          },
-          {
-            name: 'Meizu',
-            todayBuy: 130,
-            monthBuy: 870,
-            totalBuy: 3100,
-          },
-          {
-            name: 'Oneplus',
-            todayBuy: 300,
-            monthBuy: 760,
-            totalBuy: 4500,
           },
         ],
       },

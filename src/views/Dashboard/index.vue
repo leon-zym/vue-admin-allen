@@ -1,7 +1,7 @@
 <template>
   <el-row :gutter="20">
     <el-col :span="8" style="margin-top: 20px">
-      <el-card shadow="hover">
+      <el-card shadow="hover" :body-style="{ padding: '10px' }">
         <div class="user">
           <img :src="userImg" />
           <div class="userinfo">
@@ -15,7 +15,11 @@
           <p>上次登录地点：<span>湖北 武汉</span></p>
         </div>
       </el-card>
-      <el-card :style="{ marginTop: '20px', height: '465px' }" shadow="hover">
+      <el-card
+        :style="{ marginTop: '20px', height: '355px' }"
+        :body-style="{ paddingTop: 0 }"
+        shadow="hover"
+      >
         <el-table :data="tableData">
           <el-table-column
             prop="name"
@@ -35,6 +39,7 @@
           :body-style="{
             padding: 0,
             display: 'flex',
+            justifyContent: 'space-between',
           }"
           v-for="(item, index) in countData"
           :key="index"
@@ -43,30 +48,49 @@
             :class="`el-icon-${item.icon}`"
             :style="{ backgroundColor: item.color }"
           ></i>
-          <div>
-            <p class="value">￥{{ item.value }}</p>
-            <p class="name">{{ item.name }}</p>
-          </div>
+          <p class="value">￥{{ item.value }}</p>
+          <p class="name">{{ item.name }}</p>
         </el-card>
       </div>
       <el-card
         shadow="hover"
-        :style="{ height: '280px', marginTop: '20px' }"
-      ></el-card>
+        :style="{ height: '230px', marginTop: '20px' }"
+        :body-style="{ padding: '10px' }"
+      >
+        <Echarts
+          :chartData="chartData.order"
+          :isAxisChart="true"
+          style="height: 260px"
+        ></Echarts>
+      </el-card>
       <div class="graph">
         <el-card
           shadow="hover"
           :style="{
-            height: '265px',
+            height: '170px',
             width: '50%',
             marginTop: '20px',
             marginRight: '20px',
           }"
-        ></el-card>
+          :body-style="{ padding: '10px' }"
+        >
+          <Echarts
+            :chartData="chartData.user"
+            :isAxisChart="true"
+            style="height: 200px"
+          ></Echarts>
+        </el-card>
         <el-card
           shadow="hover"
-          :style="{ height: '265px', width: '50%', marginTop: '20px' }"
-        ></el-card>
+          :style="{ height: '170px', width: '50%', marginTop: '20px' }"
+          :body-style="{ padding: '10px' }"
+        >
+          <Echarts
+            :chartData="chartData.video"
+            :isAxisChart="false"
+            style="height: 150px"
+          ></Echarts>
+        </el-card>
       </div>
     </el-col>
   </el-row>
@@ -74,9 +98,14 @@
 
 <script>
 import { getData } from '@/../api/data'
+import Echarts from '@/components/Echarts'
 
 export default {
   name: 'Dashboard',
+  components: {
+    Echarts,
+  },
+
   data() {
     return {
       userImg: require('@/assets/images/user.jpg'),
@@ -119,14 +148,66 @@ export default {
           color: '#5ab1ef',
         },
       ],
+      chartData: {
+        order: {
+          xData: [],
+          series: [],
+        },
+        user: {
+          xData: [],
+          series: [],
+        },
+        video: {
+          series: [],
+        },
+      },
     }
   },
+
   mounted() {
+    // 发送请求并处理数据，生成echarts图表
     getData().then((res) => {
-      console.log(res)
       const { code, data } = res.data
       if (code === 20000) {
+        // 表格数据
         this.tableData = data.tableData
+
+        // 折线图数据
+        // es6新语法，传入一个对象，返回该对象所有可枚举属性的字符串数组
+        const keyArray = Object.keys(data.orderData.data[0])
+        const series = []
+        keyArray.forEach((key) => {
+          series.push({
+            name: key,
+            data: data.orderData.data.map((item) => item[key]),
+            type: 'line',
+          })
+        })
+        this.chartData.order.xData = data.orderData.date
+        this.chartData.order.series = series
+
+        // 柱状图数据
+        this.chartData.user.xData = data.userData.map((item) => item.date)
+        this.chartData.user.series = [
+          {
+            name: '新增用户',
+            data: data.userData.map((item) => item.new),
+            type: 'bar',
+          },
+          {
+            name: '活跃用户',
+            data: data.userData.map((item) => item.active),
+            type: 'bar',
+          },
+        ]
+
+        // 饼状图数据
+        this.chartData.video.series = [
+          {
+            data: data.videoData,
+            type: 'pie',
+          },
+        ]
       }
     })
   },
@@ -136,13 +217,14 @@ export default {
 <style lang="less" scoped>
 .user {
   display: flex;
+  margin-left: 30px;
   img {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
   }
   .userinfo {
-    margin-left: 30px;
+    margin-left: 70px;
     .name {
       font-size: 24px;
       font-weight: 400;
@@ -159,14 +241,14 @@ hr {
   background-color: #ccc;
 }
 .login-info {
-  margin-top: 25px;
+  margin-top: 20px;
   p {
-    margin-left: 25px;
+    margin-left: 40px;
     font-size: 12px;
     color: #ccc;
   }
   span {
-    margin-left: 45px;
+    margin-left: 75px;
   }
 }
 
@@ -179,23 +261,23 @@ hr {
     width: 240px;
     margin-top: 20px;
     i {
-      font-size: 26px;
+      font-size: 24px;
       color: #fff;
       text-align: center;
       width: 60px;
       line-height: 60px;
     }
     .value {
-      font-size: 24px;
-      padding-left: 24px;
+      font-size: 22px;
       margin: 0;
-      line-height: 38px;
+      line-height: 60px;
     }
     .name {
       font-size: 14px;
       color: #ccc;
+      line-height: 60px;
       margin: 0;
-      padding-left: 24px;
+      margin-right: 10px;
     }
   }
 }

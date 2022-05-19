@@ -37,6 +37,7 @@ export default {
   height: 100%;
   .el-header {
     background-color: #333;
+    height: 50px !important;
   }
   .el-aside::-webkit-scrollbar {
     display: none;

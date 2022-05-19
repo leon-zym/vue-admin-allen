@@ -65,8 +65,8 @@ header {
   }
   .r-content {
     img {
-      width: 40px;
-      height: 40px;
+      width: 35px;
+      height: 35px;
       border-radius: 50%;
     }
   }
