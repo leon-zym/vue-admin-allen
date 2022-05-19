@@ -12,7 +12,8 @@ export default {
 
 <style lang="less">
 html,
-body {
+body,
+#app {
   height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

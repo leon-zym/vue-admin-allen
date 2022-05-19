@@ -72,8 +72,7 @@ export default {
   width: 200px;
 }
 .el-menu {
-  // FIXME 不知为啥不能用100%
-  height: 100vh;
+  height: 100%;
   .side-nav-header {
     font-weight: 400;
     font-size: 16px;
