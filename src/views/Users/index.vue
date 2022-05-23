@@ -3,10 +3,14 @@
 </template>
 
 <script>
+import CommonForm from '@/components/CommonForm.vue'
+
 export default {
-  name: "Users",
-};
+  name: 'Users',
+  components: {
+    CommonForm,
+  },
+}
 </script>
 
-<style>
-</style>
+<style></style>

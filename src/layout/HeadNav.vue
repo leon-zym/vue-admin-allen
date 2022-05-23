@@ -6,7 +6,17 @@
         icon="el-icon-menu"
         @click="handleCollapseSideNav"
       ></el-button>
-      <h3 class="header-breadcrumb">首页</h3>
+      <el-tag
+        v-for="tag in tags"
+        :key="tag.path"
+        size="medium"
+        :color="$route.name === tag.name ? '' : '#fff'"
+        :closable="tag.name !== 'Dashboard'"
+        @close="handleCloseTag(tag)"
+        @click="handleClickTag(tag)"
+      >
+        {{ tag.meta.title }}
+      </el-tag>
     </div>
     <div class="r-content">
       <el-dropdown trigger="click" size="mini">
@@ -23,6 +33,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'HeadNav',
   data() {
@@ -30,20 +42,34 @@ export default {
       userImg: require('../assets/images/user.jpg'),
     }
   },
+  computed: {
+    ...mapState({
+      tags: (state) => state.nav.tagList,
+    }),
+  },
   methods: {
     handleCollapseSideNav() {
       this.$store.commit('COLLAPSESIDENAV')
+    },
+    handleCloseTag(tag) {
+      // 关闭当前tag后自动跳转到上一个tag
+      if (tag.name === this.$route.name) {
+        this.$router.push({
+          name: this.tags[this.tags.indexOf(tag) - 1].name,
+        })
+      }
+      this.tags.splice(this.tags.indexOf(tag), 1)
+    },
+    handleClickTag(tag) {
+      this.$router.push({
+        name: tag.name,
+      })
     },
   },
 }
 </script>
 
 <style lang="less" scoped>
-.header-breadcrumb {
-  font-size: 16px;
-  font-weight: 400;
-  color: #fff;
-}
 .el-dropdown-link {
   cursor: pointer;
   color: #409eff;
@@ -61,6 +87,11 @@ header {
     align-items: center;
     .el-button {
       margin-right: 20px;
+    }
+    .el-tag {
+      color: #606266;
+      margin-right: 10px;
+      cursor: pointer;
     }
   }
   .r-content {

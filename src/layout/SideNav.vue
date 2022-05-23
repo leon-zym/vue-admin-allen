@@ -54,7 +54,7 @@ export default {
       return this.navItems[0].children.filter((item) => item.children)
     },
     isCollapse() {
-      return this.$store.state.isCollapse
+      return this.$store.state.nav.isCollapse
     },
   },
   methods: {
@@ -62,6 +62,7 @@ export default {
       this.$router.push({
         name: item.name,
       })
+      this.$store.commit('NAVCLICK', item)
     },
   },
 }

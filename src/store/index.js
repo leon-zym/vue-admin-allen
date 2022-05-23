@@ -1,15 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import nav from './nav'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-    isCollapse: false,
-  },
-  mutations: {
-    COLLAPSESIDENAV(state) {
-      state.isCollapse = !state.isCollapse
-    },
+  modules: {
+    nav,
   },
 })
