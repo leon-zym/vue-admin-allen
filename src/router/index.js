@@ -25,15 +25,6 @@ const routes = [
         },
       },
       {
-        path: '/goods',
-        name: 'Goods',
-        meta: {
-          title: '商品管理',
-          icon: 's-goods',
-        },
-        component: () => import('@/views/Goods'),
-      },
-      {
         path: '/users',
         name: 'Users',
         meta: {
@@ -42,6 +33,16 @@ const routes = [
         },
         component: () => import('@/views/Users'),
       },
+      {
+        path: '/goods',
+        name: 'Goods',
+        meta: {
+          title: '商品管理',
+          icon: 's-goods',
+        },
+        component: () => import('@/views/Goods'),
+      },
+
       {
         path: '/others',
         name: 'Others',
@@ -81,6 +82,11 @@ const routes = [
         ],
       },
     ],
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/Login'),
   },
 ]
 

@@ -36,7 +36,7 @@ export default {
   // 获取列表
   // 要带参数 name, page, limit。 name可以不填，page，limit有默认值
   // @param name, page, limit
-  // @return {{code: number, count: number, data: *[]}}
+  // @return {code: number, count: number, data: []}
 
   getUserList: (config) => {
     const { name, page = 1, limit = 20 } = params2Obj(config.url)
@@ -65,7 +65,6 @@ export default {
 
   createUser: (config) => {
     const { name, addr, age, birth, sex } = JSON.parse(config.body)
-    console.log(JSON.parse(config.body))
     List.unshift({
       id: Mock.Random.guid(),
       name: name,
@@ -87,7 +86,8 @@ export default {
   // @return {*}
 
   deleteUser: (config) => {
-    const { id } = params2Obj(config.url)
+    // const { id } = params2Obj(config.url)
+    const id = config.body
     if (!id) {
       return {
         code: -999,

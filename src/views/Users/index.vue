@@ -1,8 +1,8 @@
 <template>
   <div class="manage">
     <el-dialog
-      :title="operationType === 'add' ? '新增用户' : '更新用户'"
-      :visible.sync="isShow"
+      :title="operationType === 'add' ? '新增用户' : '编辑用户'"
+      :visible="isShow"
     >
       <CommonForm
         :formLabel="operationFormLabel"
@@ -137,6 +137,7 @@ export default {
       config: {
         page: 1,
         total: 30,
+        loading: null,
       },
     }
   },
@@ -174,6 +175,7 @@ export default {
         name,
       }).then((res) => {
         this.tableData = res.data.list.map((item) => {
+          // 将数据中1、0转变为男和女
           item.sex = item.sex === 0 ? '女' : '男'
           return item
         })
@@ -190,23 +192,19 @@ export default {
       this.operationForm = { ...row }
     },
     delUser(row) {
-      this.$confirm('此操作将永久删除，是否继续？', '提示', {
+      this.$confirm('此操作将删除该用户，是否继续？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning',
       }).then(() => {
         const id = row.id
-        this.$http
-          .get('user/del', {
-            params: { id },
+        this.$http.post('user/del', id).then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功',
           })
-          .then(() => {
-            this.$message({
-              type: 'success',
-              message: '删除成功',
-            })
-            this.getList(this.searchForm.keyword)
-          })
+          this.getList(this.searchForm.keyword)
+        })
       })
     },
     handleReset() {

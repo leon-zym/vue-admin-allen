@@ -12,6 +12,7 @@
         size="medium"
         :color="$route.name === tag.name ? '' : '#fff'"
         :closable="tag.name !== 'Dashboard'"
+        :disable-transitions="true"
         @close="handleCloseTag(tag)"
         @click="handleClickTag(tag)"
       >
@@ -25,7 +26,9 @@
         </span>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>个人主页</el-dropdown-item>
-          <el-dropdown-item>退出登录</el-dropdown-item>
+          <el-dropdown-item @click.native="handleLogout"
+            >退出登录</el-dropdown-item
+          >
         </el-dropdown-menu>
       </el-dropdown>
     </div>
@@ -64,6 +67,10 @@ export default {
       this.$router.push({
         name: tag.name,
       })
+    },
+    handleLogout() {
+      this.$store.commit('CLEAR_TOKEN')
+      this.$router.push('/login')
     },
   },
 }
