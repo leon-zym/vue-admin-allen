@@ -51,8 +51,8 @@ export default {
     handleDelete(row) {
       this.$emit('del', row)
     },
-    handleChange(page) {
-      this.$emit('change', page)
+    handleChange() {
+      this.$emit('change')
     },
   },
 }

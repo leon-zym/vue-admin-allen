@@ -16,7 +16,7 @@ const routes = [
       {
         path: '/dashboard',
         name: 'Dashboard',
-        // 按需引入
+        // 懒加载
         component: () => import('@/views/Dashboard'),
         // 界面显示内容
         meta: {

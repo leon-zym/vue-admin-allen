@@ -33,7 +33,7 @@
       :tableData="tableData"
       :tableLabel="tableLabel"
       :config="config"
-      @change="getList()"
+      @change="getList"
       @edit="editUser"
       @del="delUser"
     ></CommonTable>
@@ -187,9 +187,9 @@ export default {
       this.operationType = 'edit'
       this.isShow = true
       // 默认为浅拷贝，只拷贝对象的地址。修改operationForm的同时row也会被修改
-      // this.operationForm = row
+      this.operationForm = row
       // 这里应改为深拷贝，避免修改信息的过程中operationForm的改变引起row的改变。或者调用getList()解决
-      this.operationForm = { ...row }
+      // this.operationForm = { ...row }
     },
     delUser(row) {
       this.$confirm('此操作将删除该用户，是否继续？', '提示', {
