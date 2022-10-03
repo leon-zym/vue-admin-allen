@@ -1,24 +1,10 @@
-# vue-management-allen
+# 项目介绍
 
-## Project setup
-```
-npm install
-```
+该项目作为⼀款电商后台管理系统，拥有商品数据可视化看板⻚，⽤户增删改查管理⻚，管理员登录⻚等。
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+# 技术栈
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+• 使⽤的技术栈有：Vue2 + ElementUI + Echarts + VueRouter + Vuex + Axios + Mock.js 等。
+• 使⽤ ElementUI 快速搭建⻚⾯结构，同时配合 Less 调整组件的默认样式。
+• 对 Axios ⼆次封装，添加上 baseURL 和请求响应拦截器，对请求 API 也统⼀管理，⽅便后续迭代维护。
+• 开发⽤户登录模块时，使⽤ Cookie 存储 Token。同时根据⽤户的权限动态路由跳转，并获取不同⻚⾯。
